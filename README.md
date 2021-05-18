@@ -7,6 +7,9 @@
 ####Api:
 I will create my own API similar to the Jobly project with user input as data and mocked data to start it off.
 
+The Schema can be found [here](https://dbdiagram.io/d/60a2c8cdb29a09603d1543cd)
+
+or click this link: https://dbdiagram.io/d/60a2c8cdb29a09603d1543cd
 
 
 # Getting Started with Create React App
