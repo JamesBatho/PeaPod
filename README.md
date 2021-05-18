@@ -1,3 +1,14 @@
+#PeaPod 
+######Streamlining The Informal Childcare Process
+
+
+###Database Schema
+
+####Api:
+I will create my own API similar to the Jobly project with user input as data and mocked data to start it off.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
