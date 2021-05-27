@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import JoblyApi from "./api";
+import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
 import { useHistory } from "react-router-dom";
 
@@ -35,7 +35,7 @@ function Profile() {
     let updatedUser;
 
     try {
-      updatedUser = await JoblyApi.saveProfile(username, profileData);
+      updatedUser = await PeaPodApi.saveProfile(username, profileData);
     } catch (err) {
       setFormErrors(err);
       return;
@@ -93,6 +93,18 @@ function Profile() {
             className="form-control"
             value={formData.email}
             onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Address</label>
+          <input
+            onChange={handleChange}
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Address"
+            value={formData.address}
+            className="form-control"
           />
         </div>
         <div className="form-group">

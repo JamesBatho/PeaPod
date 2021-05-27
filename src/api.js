@@ -5,12 +5,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 /** API Class.
  *
  * Static class tying together methods used to get/send to to the API.
- * There shouldn't be any frontend-specific stuff here, and there shouldn't
- * be any API-aware stuff elsewhere in the frontend.
  *
  */
 
-class JoblyApi {
+class PeaPodApi {
   // the token for interacting with the API will be stored here.
   static token;
 
@@ -20,7 +18,7 @@ class JoblyApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
 
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = { Authorization: `Bearer ${PeaPodApi.token}` };
     const params = method === "get" ? data : {};
 
     try {
@@ -34,10 +32,10 @@ class JoblyApi {
 
   // Individual API routes
 
-  /**  Get list of companies by search term */
-  static async getCompanies(name) {
-    let res = await this.request("companies", { name });
-    return res.companies;
+  /**  Get list of members by search term */
+  static async getMembers(name) {
+    let res = await this.request("users", { name });
+    return res.users;
   }
 
   /** Get details on a company by handle. */
@@ -65,6 +63,57 @@ class JoblyApi {
     return res.jobs;
   }
 
+  // POD API
+
+  // create a pod
+
+  static async createPod(data) {
+    const { name, userId0 } = data;
+    let res = await this.request("pods", { name, userId0 }, "post");
+    return res.pod;
+  }
+
+  // APPOINTMENT API
+
+  static async createAppointment(
+    isHost,
+    description,
+    childSlots,
+    startTime,
+    endTime,
+    creatorId
+  ) {
+    let res = await this.request(
+      "appointments",
+      { isHost, description, childSlots, startTime, endTime, creatorId },
+      "post"
+    );
+
+    return res.appointment;
+  }
+
+  // CHILD API
+
+  static async createChild(name, age, allergies, likes, parentId) {
+    let res = await this.request(
+      "child",
+      { name, age, allergies, likes, parentId },
+      "post"
+    );
+
+    return res.child;
+  }
+
+  // USER API
+
+  // get list of users to add members to pod
+
+  // Get list of users
+  static async getUsers() {
+    let res = await this.request("users");
+    return res.user;
+  }
+
   // Log the user in
 
   static async login(data) {
@@ -85,4 +134,4 @@ class JoblyApi {
   }
 }
 
-export default JoblyApi;
+export default PeaPodApi;

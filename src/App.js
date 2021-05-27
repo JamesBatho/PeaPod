@@ -1,19 +1,19 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import JoblyApi from "./api";
+import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
 import jwt from "jsonwebtoken";
 import Routes from "./routes/Routes";
 import useLocalStorage from "./hooks/useLocalStorage";
 
 // key for local storage
-export const TOKEN_STORAGE_ID = "jobly-token";
+export const TOKEN_STORAGE_ID = "peapod-token";
 
 function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currUser, setCurrUser] = useState(null);
-  const [applicationIds, setApplicationIds] = useState(new Set([]));
+  const [applicationIds, setApplicationIds] = useState(new Set([])); //appt ids and pod id
 
   useEffect(
     function loadUserInfo() {
@@ -21,10 +21,11 @@ function App() {
         if (token) {
           try {
             let { username } = jwt.decode(token);
-            JoblyApi.token = token;
-            let currUser = await JoblyApi.getCurrUser(username);
+            PeaPodApi.token = token;
+            let currUser = await PeaPodApi.getCurrUser(username);
             setCurrUser(currUser);
-            setApplicationIds(new Set(currUser.applications));
+            setApplicationIds(new Set(currUser.applications)); // set appt ids
+            // set pod id
           } catch (err) {
             console.error("App loadUserInfo: problem loading", err);
             setCurrUser(null);
@@ -38,7 +39,7 @@ function App() {
 
   const login = async (data) => {
     try {
-      let token = await JoblyApi.login(data);
+      let token = await PeaPodApi.login(data);
       setToken(token);
       return { success: true };
     } catch (err) {
@@ -53,7 +54,7 @@ function App() {
 
   const signup = async (data) => {
     try {
-      let token = await JoblyApi.signup(data);
+      let token = await PeaPodApi.signup(data);
       setToken(token);
       console.log(token);
       return { success: true };
@@ -69,7 +70,7 @@ function App() {
   const applyToJob = (id) => {
     if (hasAppliedToJob(id)) return;
 
-    JoblyApi.applyToJob(currUser.username, id);
+    PeaPodApi.applyToJob(currUser.username, id);
     setApplicationIds(new Set([...applicationIds, id]));
   };
   return (

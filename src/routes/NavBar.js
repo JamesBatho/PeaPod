@@ -11,13 +11,13 @@ function NavBar({ logout }) {
     return (
       <>
         <NavItem>
-          <NavLink to="/companies">Companies</NavLink>
+          <NavLink to="/pods"> My Pod </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/jobs">Jobs</NavLink>
+          <NavLink to="/children"> My Children </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/profile"> Me </NavLink>
         </NavItem>
         <NavItem>
           <NavLink id="logout" to="/" onClick={logout}>

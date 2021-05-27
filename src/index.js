@@ -12,6 +12,10 @@ ReactDOM.render(
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossOrigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
     <App />
   </React.StrictMode>,
   document.getElementById("root")

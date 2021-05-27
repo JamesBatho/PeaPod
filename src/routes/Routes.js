@@ -1,14 +1,13 @@
-import React from "react";
+import React, { Children } from "react";
 import NavBar from "./NavBar";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "../Home";
 import Profile from "../Profile";
-import Companies from "../companies/Companies";
-import Jobs from "../jobs/Jobs";
 import Login from "../auth/Login";
 import Signup from "../auth/Signup";
-import CompanyDetail from "../companies/CompanyDetail";
 import PrivateRoute from "./PrivateRoute";
+import Pod from "../Pod";
+import Child from "../Child";
 
 function Routes({ login, signup, logout }) {
   return (
@@ -18,14 +17,11 @@ function Routes({ login, signup, logout }) {
         <PrivateRoute exact path="/profile">
           <Profile />
         </PrivateRoute>
-        <PrivateRoute exact path="/companies/:handle">
-          <CompanyDetail />
+        <PrivateRoute exact path="/pods">
+          <Pod />
         </PrivateRoute>
-        <PrivateRoute exact path="/companies">
-          <Companies />
-        </PrivateRoute>
-        <PrivateRoute exact path="/jobs">
-          <Jobs />
+        <PrivateRoute exact path="/children">
+          <Child />
         </PrivateRoute>
         <Route exact path="/login">
           <Login login={login} />

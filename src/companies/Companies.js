@@ -17,7 +17,7 @@ function Companies() {
     }
     loadCompanies();
     console.log(companies);
-  }, []);
+  }, [companies]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
