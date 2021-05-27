@@ -1,84 +1,84 @@
-#PeaPod 
+# PeaPod 
 ######Streamlining The Informal Childcare Process
 
 
-###Database Schema
+### Database Schema
 
-####Api:
-I will create my own API similar to the Jobly project with user input as data and mocked data to start it off.
+## Introduction
 
-The Schema can be found [here](https://dbdiagram.io/d/60a2c8cdb29a09603d1543cd)
+PeaPod was born out of a need to reduce scheduling conflicts among informal caregivers and pool their limited resources to meet greater needs. By implementing a care-share service we can reduce the time demand on each caregiver. 
+
+This site provides a way for infomal caregivers to network within their communities and establish two way care relationships. 
+
+The site's backend is hosted on Heroku and the frontend with Surge. A link to the site can be found [Here](http://productive-hobbies.surge.sh/)
+
+## Features
+
+### User Accounts
+
+This site allows for the creation of user accounts as well as the ability to update fields once created. Passwords are hashed using Bcrypt and then stored, along with other user information, ina Postgres database.
+
+### Pods
+
+The pod is the central unit around the careshare service is based. 
+
+Users can create a pod, add other members to their pod and update details about their pod.
+
+### Care Appointments
+
+Care appointments can only be created within the context of a pod and function as the way to schedule resources between caregivers. 
+
+There are two types of care appointments, looking and asking. 
+
+Members can post one of the two types of appointments to their pod and all other members will be able to see the appointment. 
+
+Each appointment has a number of child slots, a location and a start and end time. Other pod members can either offer themselvs as the carer for the appointment or add their own child to one of the remaining child slots. 
+
+### Peas
+
+Childrens' needs are also accounted for by recording information about each child within the pod like age, likes and allergies to better inform a caregiver about the repsponsibilities required while caring for someone elses loved one.
+
+## Testing
+
+Testing is provided within each folder and the tests files end with the  `.test ` extension. 
+
+To run the test suite type: `npm test`
+
+## User Flow
+
+The standard user flow for a caregiver looking for, or offering, care is as follows:
+
+1) User reaches homepage and clicks on signup button.  
+2) User fills out signup form and clicks register.
+3) User is redirected to homepage where current pod. information is displayed. If there is no current pod, a link to the Pods page is displayed. 
+4) User creates a pod and adds other members to it. 
+5) User is prompted to go to childrens page to create their children's profiles
+6) User creates an appointment in their pod and waits until another member fills it
+7) User sees other members' appointments and fills a slot of theirs
+8) (Future) User recieves google calendar invite to the appointment with the relevant information. 
+
+## API
+
+A custom API was built for this project to handle the creation and update of the user data models. 
+
+This API was built using Express.js running on Node.js. More detailed information about the API can be found [Here](https://github.com/JamesBatho/peapod-backend)
+
+The API connects to a postgres database with th schema found [here](https://dbdiagram.io/d/60a2c8cdb29a09603d1543cd)
 
 or click this link: https://dbdiagram.io/d/60a2c8cdb29a09603d1543cd
 
+## Technology Stack
 
-# Getting Started with Create React App
+### Frontend 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend was created using React and styling was performed mainly with Bootstrap 
 
-## Available Scripts
+### Backend
 
-In the project directory, you can run:
+The backend for this project uses Express.js and a Postgres databse hosted on Heroku. 
 
-### `npm start`
+## Future Improvements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+###Search by Location
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Filtering users by location would allows caregivers to find their closest potential pod mates. 
