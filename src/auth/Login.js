@@ -60,6 +60,14 @@ function Login({ login }) {
         </form>
         {formErrors.length ? showFormErrors(formErrors) : null}
       </div>
+      <br />
+      <p>
+        Or login with these credentials
+        <br />
+        Username: tester
+        <br />
+        Password: test123
+      </p>
     </div>
   );
 }

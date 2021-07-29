@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
-import Appointment from "./Appointments";
+import Appointment from "./components/Appointments";
 
 function Pod() {
   // User stuff
@@ -44,6 +44,7 @@ function Pod() {
       const data = { name: name, userId0: currUser.username };
       const pod = await PeaPodApi.createPod(data);
       currUser.pod = pod.id;
+      setCurrUser(currUser);
     }
     createPod();
   };
@@ -75,7 +76,7 @@ function Pod() {
 
       {currUser.pod && (
         <>
-          <h1> Your pod is: {currUser.pod.name} </h1>
+          <h1> Your current pod is: {currUser.pod} </h1>
           <p>
             Add some members to your pod and simplify your childcare experience.
           </p>

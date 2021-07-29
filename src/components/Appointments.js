@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 
-import UserContext from "./auth/UserContext";
-import createAppointment from "./api";
+import UserContext from "../auth/UserContext";
+import createAppointment from "../api";
 import { useHistory } from "react-router-dom";
 
 function Appointment() {
-  const { currUser, setCurrUser } = useContext(UserContext);
+  const { currUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     isHost: false,
@@ -49,9 +49,8 @@ function Appointment() {
               <label htmlFor="isHost"> Hosting? </label>
               <input
                 onChange={handleChange}
-                type="check"
+                type="checkbox"
                 id="isHost"
-                isHost="isHost"
                 placeholder="isHost"
                 value={formData.isHost}
                 className="form-control"
@@ -61,22 +60,22 @@ function Appointment() {
               <label htmlFor="description"> Description </label>
               <input
                 onChange={handleChange}
-                type="number"
+                type="text"
                 id="description"
                 name="description"
-                placeholder="description"
+                placeholder="Description"
                 value={formData.description}
                 className="form-control"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="childSlots"> Allergies</label>
+              <label htmlFor="childSlots"> Child Slots</label>
               <input
                 onChange={handleChange}
-                type="text"
+                type="number"
                 id="childSlots"
                 name="childSlots"
-                placeholder="First Name"
+                placeholder="Number of children"
                 value={formData.childSlots}
                 className="form-control"
               />

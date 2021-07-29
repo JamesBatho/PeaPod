@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import NavBar from "./NavBar";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "../Home";
@@ -7,7 +7,7 @@ import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Pod from "../Pod";
-import Child from "../Child";
+import Children from "../Children";
 
 function Routes({ login, signup, logout }) {
   return (
@@ -21,7 +21,7 @@ function Routes({ login, signup, logout }) {
           <Pod />
         </PrivateRoute>
         <PrivateRoute exact path="/children">
-          <Child />
+          <Children />
         </PrivateRoute>
         <Route exact path="/login">
           <Login login={login} />

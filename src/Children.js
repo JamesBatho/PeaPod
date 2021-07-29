@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 
 import UserContext from "./auth/UserContext";
-import createChild from "./api";
-import { useHistory } from "react-router-dom";
+import PeaPodApi from "./api";
+import Child from "./components/Child";
 
-function Child() {
+function Children() {
   const { currUser, setCurrUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
@@ -16,8 +16,6 @@ function Child() {
   });
   const [formErrors, setFormErrors] = useState([]);
 
-  const history = useHistory();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(() => ({ ...formData, [name]: value }));
@@ -25,13 +23,15 @@ function Child() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let res = await createChild(formData);
-    console.log(res);
-    if (res.success) {
-      history.push("/home");
-    } else {
-      setFormErrors(res.err);
+    async function createChild() {
+      let res = await PeaPodApi.createChild({ ...formData });
+      if (res.success) {
+        setCurrUser(currUser);
+      } else {
+        setFormErrors(res.err);
+      }
     }
+    createChild();
   };
 
   const showFormErrors = (errors) => {
@@ -44,9 +44,8 @@ function Child() {
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
-            <h3> Your Angels </h3>
-            <h4> Child 1</h4>
-            <h4> Chld 2</h4>
+            <h2> Your Angels </h2>
+            <Child />
           </div>
           <div className="col-sm-6 childForm">
             <form onSubmit={handleSubmit}>
@@ -81,7 +80,7 @@ function Child() {
                   type="text"
                   id="allergies"
                   name="allergies"
-                  placeholder="First Name"
+                  placeholder="Allergies"
                   value={formData.allergies}
                   className="form-control"
                 />
@@ -93,14 +92,14 @@ function Child() {
                   type="text"
                   id="likes"
                   name="likes"
-                  placeholder="Last Name"
+                  placeholder="Likes"
                   value={formData.likes}
                   className="form-control"
                 />
               </div>
 
               <button className="btn btn-success">Create Child!</button>
-              <span>(if only it were always this easy...)</span>
+              <i> (if only it were always this easy...)</i>
             </form>
             {formErrors.length > 0 ? showFormErrors(formErrors) : null}
           </div>
@@ -110,4 +109,4 @@ function Child() {
   );
 }
 
-export default Child;
+export default Children;

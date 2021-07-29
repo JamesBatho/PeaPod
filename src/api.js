@@ -15,7 +15,7 @@ class PeaPodApi {
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
-    //there are multiple ways to pass an authorization token, this is how you pass it in the header.
+    //pass the authorization token in the header.
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${PeaPodApi.token}` };
@@ -94,7 +94,8 @@ class PeaPodApi {
 
   // CHILD API
 
-  static async createChild(name, age, allergies, likes, parentId) {
+  static async createChild({ name, age, allergies, likes, parentId }) {
+    age = +age;
     let res = await this.request(
       "child",
       { name, age, allergies, likes, parentId },

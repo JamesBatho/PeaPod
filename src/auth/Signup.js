@@ -9,6 +9,7 @@ function Signup({ signup }) {
     email: "",
     password: "",
     address: "",
+    isAdmin: false,
   });
   const [formErrors, setFormErrors] = useState([]);
   const history = useHistory();

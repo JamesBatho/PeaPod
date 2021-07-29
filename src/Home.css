@@ -1,0 +1,20 @@
+.news {
+}
+
+.row {
+  margin-right: 0px !important;
+}
+
+.main {
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0px !important;
+  flex-wrap: wrap;
+}
+
+/* check out css overview in chrome */
