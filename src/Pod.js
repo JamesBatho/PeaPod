@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
-import Appointment from "./components/Appointments";
+import Appointment from "./components/Appointment";
 
 function Pod() {
   // User stuff
