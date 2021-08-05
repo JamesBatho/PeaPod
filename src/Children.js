@@ -101,7 +101,7 @@ function Children() {
               <button className="btn btn-success">Create Child!</button>
               <i> (if only it were always this easy...)</i>
             </form>
-            {formErrors.length > 0 ? showFormErrors(formErrors) : null}
+            {formErrors?.length > 0 ? showFormErrors(formErrors) : null}
           </div>
         </div>
       </div>

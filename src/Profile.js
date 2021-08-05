@@ -12,6 +12,7 @@ function Profile() {
     lastName: currUser.lastName,
     email: currUser.email,
     username: currUser.username,
+    address: currUser.address,
     password: "",
   });
 
@@ -29,6 +30,7 @@ function Profile() {
       lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
+      address: formData.address,
     };
 
     let username = formData.username;
