@@ -13,7 +13,6 @@ export const TOKEN_STORAGE_ID = "peapod-token";
 function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currUser, setCurrUser] = useState(null);
-  const [applicationIds, setApplicationIds] = useState(new Set([])); //appt ids and pod id
 
   useEffect(
     function loadUserInfo() {
@@ -24,8 +23,6 @@ function App() {
             PeaPodApi.token = token;
             let currUser = await PeaPodApi.getCurrUser(username);
             setCurrUser(currUser);
-            setApplicationIds(new Set(currUser.applications)); // set appt ids
-            // set pod id
           } catch (err) {
             console.error("App loadUserInfo: problem loading", err);
             setCurrUser(null);
@@ -63,21 +60,9 @@ function App() {
     }
   };
 
-  const hasAppliedToJob = (id) => {
-    return applicationIds.has(id);
-  };
-
-  const applyToJob = (id) => {
-    if (hasAppliedToJob(id)) return;
-
-    PeaPodApi.applyToJob(currUser.username, id);
-    setApplicationIds(new Set([...applicationIds, id]));
-  };
   return (
     <BrowserRouter>
-      <UserContext.Provider
-        value={{ currUser, setCurrUser, hasAppliedToJob, applyToJob }}
-      >
+      <UserContext.Provider value={{ currUser, setCurrUser }}>
         <div className="App">
           <Routes login={login} signup={signup} logout={logout}></Routes>
         </div>

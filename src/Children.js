@@ -25,10 +25,15 @@ function Children() {
     e.preventDefault();
     async function createChild() {
       let res = await PeaPodApi.createChild({ ...formData });
-      if (res.success) {
+      if (res.name) {
+        console.log(res);
+        console.log("success");
         setCurrUser(currUser);
+        console.log(currUser);
       } else {
-        setFormErrors(res.err);
+        console.log("failure");
+        console.log(res);
+        setFormErrors(res);
       }
     }
     createChild();
@@ -45,7 +50,9 @@ function Children() {
         <div className="row">
           <div className="col-sm-6">
             <h2> Your Angels </h2>
-            <Child />
+            {currUser.children.map((child) => {
+              return <Child data={child} />;
+            })}
           </div>
           <div className="col-sm-6 childForm">
             <form onSubmit={handleSubmit}>

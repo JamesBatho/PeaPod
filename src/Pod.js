@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
-import Appointment from "./components/Appointment";
+import Appointment from "./components/AppointmentCreator";
 
 function Pod() {
   // User stuff
@@ -52,7 +52,7 @@ function Pod() {
   return (
     <div className="Pod container">
       <div className="PodForm">
-        {!currUser.pod && (
+        {currUser.pod.length === 0 && (
           <>
             <p>
               It looks like you dont have a pod just yet... Create one below!
@@ -74,7 +74,7 @@ function Pod() {
         )}
       </div>
 
-      {currUser.pod && (
+      {currUser.pod.length !== 0 && (
         <>
           <h1> Your current pod is: {currUser.pod} </h1>
           <p>
