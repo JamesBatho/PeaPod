@@ -38,29 +38,10 @@ class PeaPodApi {
     return res.users;
   }
 
-  /** Get details on a company by handle. */
-
-  static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
-    return res.company;
-  }
-
-  /**  Get list of jobs by search term */
-  static async getJobs(title) {
-    let res = await this.request("jobs", { title });
-    return res.jobs;
-  }
-
   // Get the current user
   static async getCurrUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
-  }
-
-  // Apply the current user to a job
-  static async applyToJob(username, id) {
-    let res = await this.request(`users/${username}/jobs/${id}`, {}, "post");
-    return res.jobs;
   }
 
   // POD API
@@ -73,6 +54,14 @@ class PeaPodApi {
     return res.pod;
   }
 
+  // add member to pod
+
+  static async addMember(data) {
+    const { name } = data;
+    let res = await this.request(`pods/${name}`, data, "patch");
+    return res;
+  }
+
   // APPOINTMENT API
 
   static async createAppointment(
@@ -81,11 +70,12 @@ class PeaPodApi {
     childSlots,
     startTime,
     endTime,
-    creatorId
+    creatorId,
+    podId
   ) {
     let res = await this.request(
       "appointments",
-      { isHost, description, childSlots, startTime, endTime, creatorId },
+      { isHost, description, childSlots, startTime, endTime, creatorId, podId },
       "post"
     );
 
@@ -112,7 +102,7 @@ class PeaPodApi {
   // Get list of users
   static async getUsers() {
     let res = await this.request("users");
-    return res.user;
+    return res.users;
   }
 
   // Log the user in

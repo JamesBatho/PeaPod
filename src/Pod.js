@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import PeaPodApi from "./api";
 import UserContext from "./auth/UserContext";
 import Appointment from "./components/AppointmentCreator";
+import User from "./components/User";
 
 function Pod() {
   // User stuff
   const { currUser, setCurrUser } = useContext(UserContext);
+
+  console.log(currUser);
 
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
@@ -15,19 +18,16 @@ function Pod() {
     setSearch(e.target.value);
   };
 
-  useEffect(() => {
-    async function loadUsers() {
-      const userList = await PeaPodApi.getUsers();
-      setUsers(userList);
-    }
-    loadUsers();
-  }, [users]);
-
   const handleSubmit = (e) => {
+    console.log("searching for ");
+    console.log(search);
     e.preventDefault();
     async function loadUsers() {
-      const userList = await PeaPodApi.getUsers(search);
+      const userList = await PeaPodApi.getUsers();
+      console.log(userList);
+
       setUsers(userList);
+      console.log(userList);
     }
     loadUsers();
     setSearch("");
@@ -52,7 +52,7 @@ function Pod() {
   return (
     <div className="Pod container">
       <div className="PodForm">
-        {currUser.pod.length === 0 && (
+        {!currUser.pod && (
           <>
             <p>
               It looks like you dont have a pod just yet... Create one below!
@@ -73,13 +73,25 @@ function Pod() {
           </>
         )}
       </div>
-
-      {currUser.pod.length !== 0 && (
+      {currUser.pod && (
         <>
-          <h1> Your current pod is: {currUser.pod} </h1>
-          <p>
-            Add some members to your pod and simplify your childcare experience.
-          </p>
+          <h1> Your current pod is: {currUser.pod.name} </h1>
+          {!currUser.pod.userId1 && (
+            <p>
+              Add some members to your pod and simplify your childcare
+              experience.
+            </p>
+          )}
+          {currUser.pod.userId1 && (
+            <div>
+              <h3> Current Members: </h3>
+              <p>
+                {" "}
+                {currUser.pod.userId0} and {currUser.pod.userId1}{" "}
+              </p>
+            </div>
+          )}
+
           <h2 className="mt-3 ml-2"> PeaPod Member Database </h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group m-2">
@@ -97,12 +109,17 @@ function Pod() {
             </div>
             <button className="btn btn-info m-2"> Search</button>
           </form>
+          {users && (
+            <div>
+              {users.map((user) => {
+                return <User key={user.username} data={user} />;
+              })}
+            </div>
+          )}
         </>
       )}
-
       {currUser.pod && <Appointment />}
     </div>
   );
 }
-
 export default Pod;

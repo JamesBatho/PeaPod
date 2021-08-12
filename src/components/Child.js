@@ -1,9 +1,10 @@
 import React from "react";
 import "./Child.css";
 
-function Child({ name, age, allergies, likes }) {
+function Child({ data }) {
+  const { name, age, allergies, likes, key } = data;
   return (
-    <div className="child">
+    <div className="child" key={key}>
       <h3> Name: {name} </h3>
       <h4> Age: {age} </h4>
       <h4>

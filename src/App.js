@@ -34,6 +34,23 @@ function App() {
     [token]
   );
 
+  function updateCurrentUser() {
+    async function getCurrentUser() {
+      if (token) {
+        try {
+          let { username } = jwt.decode(token);
+          PeaPodApi.token = token;
+          let currUser = await PeaPodApi.getCurrUser(username);
+          setCurrUser(currUser);
+        } catch (err) {
+          console.error("App loadUserInfo: problem loading", err);
+          setCurrUser(null);
+        }
+      }
+    }
+    getCurrentUser();
+  }
+
   const login = async (data) => {
     try {
       let token = await PeaPodApi.login(data);
@@ -62,7 +79,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ currUser, setCurrUser }}>
+      <UserContext.Provider
+        value={{ currUser, setCurrUser, updateCurrentUser }}
+      >
         <div className="App">
           <Routes login={login} signup={signup} logout={logout}></Routes>
         </div>

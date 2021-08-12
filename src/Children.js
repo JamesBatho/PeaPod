@@ -5,7 +5,7 @@ import PeaPodApi from "./api";
 import Child from "./components/Child";
 
 function Children() {
-  const { currUser, setCurrUser } = useContext(UserContext);
+  const { currUser, updateCurrentUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -28,8 +28,7 @@ function Children() {
       if (res.name) {
         console.log(res);
         console.log("success");
-        setCurrUser(currUser);
-        console.log(currUser);
+        updateCurrentUser();
       } else {
         console.log("failure");
         console.log(res);
@@ -51,7 +50,7 @@ function Children() {
           <div className="col-sm-6">
             <h2> Your Angels </h2>
             {currUser.children.map((child) => {
-              return <Child data={child} />;
+              return <Child key={child.id} data={child} />;
             })}
           </div>
           <div className="col-sm-6 childForm">

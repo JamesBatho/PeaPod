@@ -4,7 +4,7 @@ import UserContext from "../auth/UserContext";
 import createAppointment from "../api";
 import { useHistory } from "react-router-dom";
 
-function Appointment() {
+function AppointmentCreator() {
   const { currUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
@@ -114,4 +114,4 @@ function Appointment() {
   );
 }
 
-export default Appointment;
+export default AppointmentCreator;
