@@ -10,7 +10,7 @@ PeaPod was born out of a need to reduce scheduling conflicts among informal care
 
 This site provides a way for infomal caregivers to network within their communities and establish two way care relationships. 
 
-The site's backend is hosted on Heroku and the frontend with Surge. A link to the site can be found [Here](http://productive-hobbies.surge.sh/)
+The site's backend is hosted on Heroku and the frontend with Surge. A link to the site can be found [Here](http://pea-pod2.surge.sh/)
 
 ## Features
 
